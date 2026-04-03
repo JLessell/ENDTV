@@ -1536,26 +1536,18 @@ const projects = {
   lenclume:    { title: "A Year at L'Enclume",    sub: "Short film",                              vimeo: "" },
 };
 function openLightbox(key) {
-  const p = projects[key];
+  var p = projects[key];
   if (!p) return;
   document.getElementById('lightbox-title').textContent = p.title;
   document.getElementById('lightbox-sub').textContent = p.sub;
-  const lv = document.querySelector('.lightbox-video');
+  var lv = document.querySelector('.lightbox-video');
+  lv.style.paddingTop = '56.25%';
+  lv.style.height = '';
   if (p.vimeo) {
-    const w = lv.offsetWidth || window.innerWidth * 0.9;
-    const h = Math.round(w * 9 / 16);
-    lv.style.paddingTop = '0';
-    lv.style.height = h + 'px';
-    const iframe = document.createElement('iframe');
-    var url = 'https://player.vimeo.com/video/' + p.vimeo + '?autoplay=1&title=0&byline=0&portrait=0'; if (p.hash) url += '&h=' + p.hash; iframe.src = url;
-    iframe.setAttribute('allow', 'autoplay; fullscreen; picture-in-picture');
-    iframe.setAttribute('allowfullscreen', '');
-    iframe.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;border:none;';
-    lv.innerHTML = '';
-    lv.appendChild(iframe);
+    var src = 'https://player.vimeo.com/video/' + p.vimeo + '?autoplay=1&title=0&byline=0&portrait=0';
+    if (p.hash) src += '&h=' + p.hash;
+    lv.innerHTML = '<iframe src="' + src + '" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"></iframe>';
   } else {
-    lv.style.paddingTop = '56.25%';
-    lv.style.height = '';
     lv.innerHTML = '<div class="lightbox-placeholder"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg><p>Trailer coming soon</p></div>';
   }
   document.getElementById('lightbox').classList.add('open');
@@ -1563,9 +1555,7 @@ function openLightbox(key) {
 }
 function closeLightbox() {
   document.getElementById('lightbox').classList.remove('open');
-  const lv = document.querySelector('.lightbox-video');
-  lv.style.paddingTop = '56.25%';
-  lv.style.height = '';
+  var lv = document.querySelector('.lightbox-video');
   lv.innerHTML = '<div class="lightbox-placeholder"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg><p>Trailer coming soon</p></div>';
   document.body.style.overflow = '';
 }
