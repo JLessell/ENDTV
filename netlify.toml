@@ -1,0 +1,4 @@
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "frame-src 'self' https://player.vimeo.com https://vimeo.com; frame-ancestors 'self';"
