@@ -7,32 +7,6 @@
 // To add/remove/change clients: just edit the Google Sheet.
 // Changes propagate within ~5 minutes (Google's CDN cache).
 
-const https = require("https");
-const http = require("http");
-
-function fetchSheet(url, maxRedirects) {
-  if (maxRedirects === undefined) maxRedirects = 5;
-  return new Promise((resolve, reject) => {
-    const sep = url.includes("?") ? "&" : "?";
-    const fullUrl = url + sep + "t=" + Date.now();
-    const client = fullUrl.startsWith("https") ? https : http;
-    client
-      .get(fullUrl, (res) => {
-        if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
-          if (maxRedirects <= 0) return reject(new Error("Too many redirects"));
-          return fetchSheet(res.headers.location, maxRedirects - 1).then(resolve, reject);
-        }
-        if (res.statusCode < 200 || res.statusCode >= 300) {
-          return reject(new Error("HTTP " + res.statusCode));
-        }
-        let data = "";
-        res.on("data", (chunk) => (data += chunk));
-        res.on("end", () => resolve(data));
-      })
-      .on("error", reject);
-  });
-}
-
 function parseCSV(text) {
   const rows = [];
   let row = [];
@@ -101,7 +75,11 @@ exports.handler = async function (event) {
   }
 
   try {
-    const csv = await fetchSheet(sheetUrl);
+    const sep = sheetUrl.includes("?") ? "&" : "?";
+    const res = await fetch(sheetUrl + sep + "t=" + Date.now(), { redirect: "follow" });
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const csv = await res.text();
+
     const rows = parseCSV(csv);
     const clients = rows
       .map((r) => ({
