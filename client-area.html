@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client Area &mdash; The End TV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#080808;--off-black:#101010;--dark:#161616;--mid:#252525;
+  --border:#1e1e1e;--border-light:#2a2a2a;
+  --white:#ffffff;--off-white:#aaaaaa;--muted:#505050;
+  --cyan:#5bc8f5;--cyan-dim:#2a7a9a;
+  --bebas:'Barlow Condensed',Impact,sans-serif;
+  --sans:'Outfit',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--black);
+  color:var(--white);
+  font-family:var(--sans);
+  font-weight:300;
+  line-height:1.7;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  overflow-x:hidden;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.4rem 2.8rem;
+  transition:background 0.4s,padding 0.3s,border-color 0.4s,backdrop-filter 0.4s;
+  border-bottom:1px solid transparent;
+}
+nav.scrolled{
+  background:rgba(8,8,8,0.97);
+  border-bottom-color:var(--border);
+  padding:0.9rem 2.8rem;
+  backdrop-filter:blur(16px);
+}
+.nav-logo{display:flex;align-items:center;}
+.nav-logo img{height:44px;width:auto;display:block;}
+.nav-back{
+  font-size:0.7rem;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--off-white);text-decoration:none;cursor:pointer;
+  transition:color 0.2s;
+}
+.nav-back:hover{color:var(--cyan);}
+
+/* HERO SECTION */
+main{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:7rem 2rem 4rem;
+  text-align:center;
+  position:relative;
+}
+
+.hero-eyebrow{
+  font-size:0.78rem;letter-spacing:0.24em;text-transform:uppercase;
+  color:var(--cyan);font-weight:500;
+  margin-bottom:1.6rem;
+  opacity:0;
+  animation:fadeUp 0.7s 0.05s ease forwards;
+}
+.hero-headline{
+  font-family:var(--bebas);
+  font-size:clamp(3.6rem,8.5vw,7.5rem);
+  line-height:0.92;letter-spacing:0.01em;
+  text-transform:uppercase;
+  margin-bottom:1.4rem;
+  opacity:0;
+  animation:fadeUp 0.8s 0.15s ease forwards;
+}
+.hero-headline span{display:block;}
+.hero-headline .accent{color:var(--cyan);}
+
+.hero-sub{
+  font-size:1rem;color:var(--off-white);
+  max-width:480px;font-weight:300;line-height:1.75;
+  margin-bottom:2.8rem;
+  opacity:0;
+  animation:fadeUp 0.8s 0.25s ease forwards;
+}
+
+/* LOGIN CARD */
+.card{
+  width:100%;
+  max-width:460px;
+  background:var(--off-black);
+  border:1px solid var(--border);
+  position:relative;
+  padding:3rem 2.4rem 2.6rem;
+  text-align:left;
+  opacity:0;
+  animation:fadeUp 0.8s 0.35s ease forwards;
+}
+.card::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:2px;
+  background:var(--cyan);
+  box-shadow:0 0 24px rgba(91,200,245,0.4);
+}
+
+.field{margin-bottom:1.4rem;}
+.field label{
+  display:block;
+  font-size:0.65rem;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--off-white);
+  margin-bottom:0.6rem;
+  font-weight:400;
+}
+.field input{
+  width:100%;
+  background:var(--dark);
+  border:1px solid var(--border-light);
+  color:var(--white);
+  font-family:var(--sans);
+  font-size:0.95rem;
+  font-weight:300;
+  padding:0.95rem 1rem;
+  outline:none;
+  transition:border-color 0.25s ease,background 0.25s ease,box-shadow 0.25s ease;
+}
+.field input::placeholder{color:var(--muted);}
+.field input:focus{
+  border-color:var(--cyan);
+  background:var(--mid);
+  box-shadow:0 0 0 3px rgba(91,200,245,0.12);
+}
+.field input.error{
+  border-color:#ff4d4d;
+  background:rgba(255,77,77,0.06);
+  box-shadow:0 0 0 3px rgba(255,77,77,0.12);
+}
+.password-wrap{position:relative;}
+.password-wrap input{padding-right:3rem;}
+.pw-toggle{
+  position:absolute;
+  right:0.6rem;
+  top:50%;
+  transform:translateY(-50%);
+  width:34px;height:34px;
+  display:flex;align-items:center;justify-content:center;
+  background:transparent;
+  border:none;
+  cursor:pointer;
+  color:var(--off-white);
+  padding:0;
+  transition:color 0.2s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.pw-toggle:hover{color:var(--cyan);}
+.pw-toggle:focus{outline:none;color:var(--cyan);}
+.pw-toggle svg{width:20px;height:20px;display:block;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
+.pw-toggle .icon-eye-off{display:none;}
+.pw-toggle.shown .icon-eye{display:none;}
+.pw-toggle.shown .icon-eye-off{display:block;}
+
+.error-msg{
+  display:none;
+  font-size:0.78rem;
+  color:#ff6b6b;
+  line-height:1.55;
+  margin-top:-0.4rem;
+  margin-bottom:1.2rem;
+  padding:0.85rem 1rem;
+  border:1px solid rgba(255,77,77,0.3);
+  background:rgba(255,77,77,0.06);
+}
+.error-msg.show{display:block;}
+
+.idle-warning{
+  display:none;
+  margin-top:1.4rem;
+  padding:0.85rem 1rem;
+  border:1px solid rgba(91,200,245,0.35);
+  background:rgba(91,200,245,0.06);
+  color:var(--off-white);
+  font-size:0.78rem;
+  line-height:1.55;
+  text-align:center;
+}
+.idle-warning.show{display:block;}
+.idle-warning strong{color:var(--cyan);font-weight:500;}
+
+.btn{
+  width:100%;
+  display:flex;align-items:center;justify-content:center;gap:0.6rem;
+  background:var(--cyan);
+  color:var(--black);
+  border:none;
+  font-family:var(--bebas);
+  font-size:1.05rem;
+  font-weight:700;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  padding:1.1rem 1.4rem;
+  cursor:pointer;
+  text-decoration:none;
+  transition:background 0.25s ease,transform 0.2s ease,box-shadow 0.25s ease;
+}
+.btn:hover{
+  background:#7dd6f7;
+  box-shadow:0 0 28px rgba(91,200,245,0.35);
+  transform:translateY(-1px);
+}
+.btn:active{transform:translateY(0);}
+
+.note{
+  display:block;
+  font-size:0.72rem;
+  color:var(--muted);
+  line-height:1.7;
+  margin-top:1.4rem;
+  text-align:center;
+}
+.note a{color:var(--off-white);text-decoration:none;border-bottom:1px solid var(--border-light);transition:color 0.2s,border-color 0.2s;}
+.note a:hover{color:var(--cyan);border-color:var(--cyan);}
+
+/* SUCCESS STATE */
+.success{
+  display:none;
+  text-align:center;
+  padding:0.4rem 0 0.6rem;
+}
+.success.show{display:block;}
+.success-tick{
+  width:72px;height:72px;
+  border:3px solid var(--cyan);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 1.6rem;
+  background:rgba(91,200,245,0.08);
+  box-shadow:0 0 32px rgba(91,200,245,0.35);
+  animation:popIn 0.5s ease both;
+}
+.success-tick svg{width:34px;height:34px;stroke:var(--cyan);fill:none;}
+.success h2{
+  font-family:var(--bebas);
+  font-size:2.2rem;
+  letter-spacing:0.04em;
+  text-transform:uppercase;
+  margin-bottom:0.6rem;
+}
+.success h2::after{content:'.';color:var(--cyan);}
+.success p{
+  font-size:0.92rem;
+  color:var(--off-white);
+  line-height:1.7;
+  margin-bottom:1.8rem;
+  max-width:340px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+/* FOOTER */
+footer{
+  border-top:1px solid var(--border);
+  padding:1.4rem 2rem;
+  text-align:center;
+  font-size:0.62rem;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px);}
+  to{opacity:1;transform:translateY(0);}
+}
+@keyframes popIn{
+  0%{opacity:0;transform:scale(0.6);}
+  60%{opacity:1;transform:scale(1.06);}
+  100%{opacity:1;transform:scale(1);}
+}
+
+/* RESPONSIVE */
+@media (max-width:600px){
+  nav{padding:1.1rem 1.4rem;}
+  nav.scrolled{padding:0.8rem 1.4rem;}
+  .nav-logo img{height:34px;}
+  main{padding:6rem 1.2rem 3rem;}
+  .card{padding:2.4rem 1.6rem 2rem;}
+  .hero-headline{font-size:clamp(2.8rem,12vw,4.6rem);}
+}
+</style>
+</head>
+<body>
+
+<nav id="main-nav">
+  <a href="index.html" class="nav-logo" onclick="if(history.length>1){event.preventDefault();history.back();}">
+    <img src="https://raw.githubusercontent.com/JLessell/ENDTV/dbca433f3430b22355731b24da158d1ea68adae7/THE%20END%20LOGO%202026%20WHITE%20LONG.png" alt="The End TV">
+  </a>
+  <a href="index.html" class="nav-back" onclick="if(history.length>1){event.preventDefault();history.back();}">&larr; Back to main site</a>
+</nav>
+
+<main>
+  <div class="hero-eyebrow">Secure Access</div>
+  <h1 class="hero-headline">
+    <span>Client</span>
+    <span class="accent">Area</span>
+  </h1>
+  <p class="hero-sub">Sign in with your organisation name and access code to view your project content.</p>
+
+  <div class="card">
+    <form id="login-form" novalidate>
+      <div class="field">
+        <label for="org">Organisation</label>
+        <input type="text" id="org" name="org" placeholder="Your organisation name" autocomplete="off" spellcheck="false">
+      </div>
+      <div class="field">
+        <label for="password">Password</label>
+        <div class="password-wrap">
+          <input type="password" id="password" name="password" placeholder="Enter your password" autocomplete="off">
+          <button type="button" class="pw-toggle" id="pw-toggle" aria-label="Show password" aria-pressed="false">
+            <svg class="icon-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+            <svg class="icon-eye-off" viewBox="0 0 24 24"><path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-6.5 0-10-7-10-7a18.42 18.42 0 0 1 4.22-5.19"/><path d="M9.9 4.24A10.94 10.94 0 0 1 12 4c6.5 0 10 7 10 7a18.5 18.5 0 0 1-2.16 3.19"/><path d="M14.12 14.12a3 3 0 0 1-4.24-4.24"/><line x1="2" y1="2" x2="22" y2="22"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="error-msg" id="error-msg">Those details don't match our records. Please check and try again, or get in touch.</div>
+      <button type="submit" class="btn">Access My Content &rarr;</button>
+      <span class="note">Don't have access yet? Get in touch at <a href="mailto:hello@theend.tv">hello@theend.tv</a> and we'll set you up.</span>
+    </form>
+
+    <div class="success" id="success">
+      <div class="success-tick">
+        <svg viewBox="0 0 24 24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+      <h2>Access Granted</h2>
+      <p>Welcome back. Your project content is ready.</p>
+      <a id="content-link" class="btn" href="#" target="_blank" rel="noopener">View My Content &rarr;</a>
+      <div class="idle-warning" id="idle-warning" role="alert" aria-live="polite">
+        Signing you out in <strong><span id="idle-countdown">60</span>s</strong> &mdash; move your mouse to stay signed in.
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  &copy; 2025 The End TV Limited &middot; London, UK &middot; Confidential
+</footer>
+
+<script>
+(function() {
+  // ── Session timeout configuration ────────────────────────────
+  // Hard session: signed-in user is bumped to login screen this long after sign-in,
+  // even if they're actively using the page.
+  const HARD_TIMEOUT_MS = 2 * 60 * 60 * 1000; // 2 hours
+  // Inactivity timeout: signed-in user is bumped to login after this long with
+  // no mouse, keyboard or touch input.
+  const IDLE_TIMEOUT_MS = 15 * 60 * 1000;     // 15 minutes
+  // Warning shown this long before the inactivity logout fires.
+  const IDLE_WARN_MS    = 60 * 1000;          // 60 seconds
+  // sessionStorage key — scoped to the browser tab, cleared when the tab closes.
+  const STORAGE_KEY     = 'endtv_client_session';
+  // ─────────────────────────────────────────────────────────────
+
+  const form         = document.getElementById('login-form');
+  const orgIn        = document.getElementById('org');
+  const passIn       = document.getElementById('password');
+  const pwToggle     = document.getElementById('pw-toggle');
+  const errorMsg     = document.getElementById('error-msg');
+  const success      = document.getElementById('success');
+  const contentLink  = document.getElementById('content-link');
+  const idleWarning  = document.getElementById('idle-warning');
+  const idleCountdown= document.getElementById('idle-countdown');
+  const nav          = document.getElementById('main-nav');
+
+  let isAuthed   = false;
+  let hardTimer  = null;
+  let idleTimer  = null;
+  let warnTimer  = null;
+  let countdownT = null;
+  let lastActivityReset = 0;
+
+  // Password visibility toggle
+  pwToggle.addEventListener('click', function() {
+    const showing = passIn.type === 'text';
+    passIn.type = showing ? 'password' : 'text';
+    pwToggle.classList.toggle('shown', !showing);
+    pwToggle.setAttribute('aria-pressed', String(!showing));
+    pwToggle.setAttribute('aria-label', showing ? 'Show password' : 'Hide password');
+    passIn.focus();
+  });
+
+  function clearErrors() {
+    orgIn.classList.remove('error');
+    passIn.classList.remove('error');
+    errorMsg.classList.remove('show');
+  }
+
+  function showErrors() {
+    orgIn.classList.add('error');
+    passIn.classList.add('error');
+    errorMsg.classList.add('show');
+  }
+
+  // ── Timer management ─────────────────────────────────────────
+  function clearAllTimers() {
+    if (hardTimer)  { clearTimeout(hardTimer);   hardTimer  = null; }
+    if (idleTimer)  { clearTimeout(idleTimer);   idleTimer  = null; }
+    if (warnTimer)  { clearTimeout(warnTimer);   warnTimer  = null; }
+    if (countdownT) { clearInterval(countdownT); countdownT = null; }
+  }
+
+  function hideWarning() {
+    idleWarning.classList.remove('show');
+    if (countdownT) { clearInterval(countdownT); countdownT = null; }
+  }
+
+  function showWarning() {
+    idleWarning.classList.add('show');
+    var remaining = Math.round(IDLE_WARN_MS / 1000);
+    idleCountdown.textContent = remaining;
+    countdownT = setInterval(function() {
+      remaining--;
+      idleCountdown.textContent = Math.max(0, remaining);
+      if (remaining <= 0 && countdownT) { clearInterval(countdownT); countdownT = null; }
+    }, 1000);
+  }
+
+  function resetIdleTimer() {
+    if (idleTimer) clearTimeout(idleTimer);
+    if (warnTimer) clearTimeout(warnTimer);
+    hideWarning();
+    warnTimer = setTimeout(showWarning, IDLE_TIMEOUT_MS - IDLE_WARN_MS);
+    idleTimer = setTimeout(signOut, IDLE_TIMEOUT_MS);
+  }
+
+  function startTimers(signInAt) {
+    clearAllTimers();
+    var elapsed = Date.now() - signInAt;
+    var remaining = HARD_TIMEOUT_MS - elapsed;
+    if (remaining <= 0) { signOut(); return; }
+    hardTimer = setTimeout(signOut, remaining);
+    resetIdleTimer();
+  }
+
+  function onActivity() {
+    if (!isAuthed) return;
+    var now = Date.now();
+    if (now - lastActivityReset < 1000) return; // throttle to once per second
+    lastActivityReset = now;
+    resetIdleTimer();
+  }
+
+  ['mousemove','keydown','touchstart','click','scroll'].forEach(function(ev) {
+    document.addEventListener(ev, onActivity, { passive: true });
+  });
+
+  // ── Session storage ──────────────────────────────────────────
+  function saveSession(org, url, signInAt) {
+    try {
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ org: org, url: url, signInAt: signInAt }));
+    } catch (e) {}
+  }
+
+  function loadSession() {
+    try {
+      var raw = sessionStorage.getItem(STORAGE_KEY);
+      if (!raw) return null;
+      var s = JSON.parse(raw);
+      if (!s || !s.url || !s.signInAt) return null;
+      if (Date.now() - s.signInAt > HARD_TIMEOUT_MS) {
+        sessionStorage.removeItem(STORAGE_KEY);
+        return null;
+      }
+      return s;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function clearSessionStore() {
+    try { sessionStorage.removeItem(STORAGE_KEY); } catch (e) {}
+  }
+
+  // ── Sign in / sign out ───────────────────────────────────────
+  function enterSuccess(org, url, signInAt, isRestore) {
+    clearErrors();
+    form.style.display = 'none';
+    success.classList.add('show');
+    contentLink.href = url;
+    isAuthed = true;
+    startTimers(signInAt);
+    if (!isRestore) {
+      saveSession(org, url, signInAt);
+      setTimeout(function() {
+        window.open(url, '_blank', 'noopener');
+      }, 600);
+    }
+  }
+
+  function signOut() {
+    isAuthed = false;
+    clearAllTimers();
+    hideWarning();
+    clearSessionStore();
+    success.classList.remove('show');
+    form.style.display = '';
+    orgIn.value = '';
+    passIn.value = '';
+    // Reset password visibility toggle
+    passIn.type = 'password';
+    pwToggle.classList.remove('shown');
+    pwToggle.setAttribute('aria-pressed', 'false');
+    pwToggle.setAttribute('aria-label', 'Show password');
+    clearErrors();
+    orgIn.focus();
+  }
+
+  async function tryLogin() {
+    const org  = orgIn.value;
+    const pass = passIn.value;
+
+    if (!org || !pass) {
+      showErrors();
+      return;
+    }
+
+    // Send credentials to the server-side Netlify function
+    try {
+      const res = await fetch('/.netlify/functions/client-login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ org: org, password: pass })
+      });
+
+      if (!res.ok) {
+        showErrors();
+        return;
+      }
+
+      const data = await res.json();
+      if (!data.url) {
+        showErrors();
+        return;
+      }
+
+      enterSuccess(org, data.url, Date.now(), false);
+    } catch (e) {
+      showErrors();
+    }
+  }
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    tryLogin();
+  });
+
+  // Clear errors as soon as the user starts correcting; Enter on either field submits
+  [orgIn, passIn].forEach(function(input) {
+    input.addEventListener('input', clearErrors);
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        tryLogin();
+      }
+    });
+  });
+
+  // Nav gains dark background on scroll
+  window.addEventListener('scroll', function() {
+    nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Restore an active session if the user returns to this tab while still
+  // signed in (e.g. via the browser back button). Expired sessions are
+  // discarded inside loadSession().
+  var existing = loadSession();
+  if (existing) {
+    enterSuccess(existing.org, existing.url, existing.signInAt, true);
+  }
+})();
+</script>
+
+</body>
+</html>
