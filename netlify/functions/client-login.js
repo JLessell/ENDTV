@@ -8,13 +8,20 @@
 // Changes propagate within ~5 minutes (Google's CDN cache).
 
 const https = require("https");
+const http = require("http");
 
-function fetchSheet(url) {
+function fetchSheet(url, maxRedirects) {
+  if (maxRedirects === undefined) maxRedirects = 5;
   return new Promise((resolve, reject) => {
     const sep = url.includes("?") ? "&" : "?";
     const fullUrl = url + sep + "t=" + Date.now();
-    https
+    const client = fullUrl.startsWith("https") ? https : http;
+    client
       .get(fullUrl, (res) => {
+        if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+          if (maxRedirects <= 0) return reject(new Error("Too many redirects"));
+          return fetchSheet(res.headers.location, maxRedirects - 1).then(resolve, reject);
+        }
         if (res.statusCode < 200 || res.statusCode >= 300) {
           return reject(new Error("HTTP " + res.statusCode));
         }
