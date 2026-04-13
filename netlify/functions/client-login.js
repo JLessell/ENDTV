@@ -7,6 +7,46 @@
 // To add/remove/change clients: just edit the Google Sheet.
 // Changes propagate within ~5 minutes (Google's CDN cache).
 
+const https = require("https");
+
+function httpsGet(targetUrl, maxRedirects) {
+  if (maxRedirects === undefined) maxRedirects = 5;
+  return new Promise((resolve, reject) => {
+    const parsed = new URL(targetUrl);
+    const options = {
+      hostname: parsed.hostname,
+      path: parsed.pathname + parsed.search,
+      method: "GET",
+      headers: { "User-Agent": "EndTV-Login/1.0" },
+    };
+    https
+      .request(options, (res) => {
+        if (
+          res.statusCode >= 300 &&
+          res.statusCode < 400 &&
+          res.headers.location
+        ) {
+          if (maxRedirects <= 0) return reject(new Error("Too many redirects"));
+          let redirectUrl = res.headers.location;
+          if (redirectUrl.startsWith("/")) {
+            redirectUrl = parsed.protocol + "//" + parsed.hostname + redirectUrl;
+          }
+          res.resume();
+          return httpsGet(redirectUrl, maxRedirects - 1).then(resolve, reject);
+        }
+        if (res.statusCode < 200 || res.statusCode >= 300) {
+          res.resume();
+          return reject(new Error("HTTP " + res.statusCode));
+        }
+        let data = "";
+        res.on("data", (chunk) => (data += chunk));
+        res.on("end", () => resolve(data));
+      })
+      .on("error", reject)
+      .end();
+  });
+}
+
 function parseCSV(text) {
   const rows = [];
   let row = [];
@@ -76,9 +116,7 @@ exports.handler = async function (event) {
 
   try {
     const sep = sheetUrl.includes("?") ? "&" : "?";
-    const res = await fetch(sheetUrl + sep + "t=" + Date.now(), { redirect: "follow" });
-    if (!res.ok) throw new Error("HTTP " + res.status);
-    const csv = await res.text();
+    const csv = await httpsGet(sheetUrl + sep + "t=" + Date.now());
 
     const rows = parseCSV(csv);
     const clients = rows
@@ -97,6 +135,9 @@ exports.handler = async function (event) {
 
     return { statusCode: 200, body: JSON.stringify({ url: match.url }) };
   } catch (err) {
-    return { statusCode: 500, body: JSON.stringify({ error: "Login service unavailable" }) };
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: "Login service unavailable", debug: err.message }),
+    };
   }
 };
