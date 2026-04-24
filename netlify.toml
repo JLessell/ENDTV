@@ -10,6 +10,13 @@
   [headers.values]
     Content-Security-Policy = "frame-src 'self' https://player.vimeo.com https://vimeo.com; frame-ancestors 'self';"
 
+# Clean URL for the ABF AGM Live deck — must come before the catch-all below
+# so it is matched first.
+[[redirects]]
+  from = "/ABF-AGM-2026"
+  to = "/theenddeck/ABF-AGM-2026.html"
+  status = 200
+
 # SPA deep-link support: any unknown path serves index.html so the
 # client-side router can read location.pathname and render the right page.
 # Existing files (e.g. client-area.html, og-image.jpg) are served as-is
