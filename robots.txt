@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /theenddeck/
+
+Sitemap: https://www.theendtv.co.uk/sitemap.xml
