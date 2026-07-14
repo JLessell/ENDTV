@@ -1059,6 +1059,83 @@ footer{background:var(--off-black);border-top:1px solid var(--border);padding:2.
 .ep-label{position:absolute;bottom:6px;left:8px;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55);font-family:var(--sans);}
 .series-divider{border:none;border-top:1px solid rgba(255,255,255,0.06);margin:0 0 3rem;}
 .vimeo-mobile-fallback-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;border:none;}
+/* =================================================
+   POST-WORKFLOW PAGE — /postworkflow
+   ================================================= */
+#postworkflow .pw-hero{padding:7rem 2.8rem 3rem;border-bottom:1px solid var(--border);position:relative;z-index:1;text-align:center;overflow:hidden;min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;}
+#postworkflow .pw-hero-top,#postworkflow .pw-hero-bottom{position:relative;z-index:2;max-width:900px;margin:0 auto;width:100%;}
+#postworkflow .pw-hero-top{padding-top:1rem;}
+#postworkflow .pw-hero-bottom{padding-bottom:2rem;}
+#postworkflow .pw-video-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;}
+#postworkflow .pw-video-bg iframe{position:absolute;top:50%;left:50%;width:177.78vh;height:100vh;min-width:100%;min-height:56.25vw;transform:translate(-50%,-50%);border:none;pointer-events:none;}
+#postworkflow .pw-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(8,8,8,0.55) 0%,rgba(8,8,8,0.25) 25%,rgba(8,8,8,0.2) 55%,rgba(8,8,8,0.35) 100%);pointer-events:none;}
+#postworkflow .pw-slabel{font-family:var(--bebas);font-size:clamp(1.85rem,3vw,2.4rem);letter-spacing:0.06em;text-transform:uppercase;color:var(--cyan);font-weight:600;line-height:1.1;margin-bottom:1.2rem;}
+#postworkflow .pw-headline-logo{margin:0 auto;line-height:0;}
+#postworkflow .pw-headline-logo img{height:clamp(2.25rem,5.6vw,4.9rem);width:auto;display:inline-block;filter:drop-shadow(0 0 30px rgba(91,200,245,0.35));}
+#postworkflow .pw-hero p{color:#c8c8c8;font-size:1.15rem;line-height:1.75;margin:0 auto;max-width:900px;}
+#postworkflow .pw-controls{display:flex;justify-content:center;align-items:center;padding:1.3rem 2.8rem;border-bottom:1px solid var(--border);position:relative;z-index:1;gap:0.7rem;flex-wrap:wrap;}
+#postworkflow .pw-btn{font-family:var(--sans);font-size:0.7rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;padding:0.72rem 1.6rem;cursor:pointer;border:none;transition:background 0.2s,color 0.2s,border-color 0.2s,box-shadow 0.2s;}
+#postworkflow .pw-btn-p{background:var(--cyan);color:var(--black);}
+#postworkflow .pw-btn-p:hover{background:#7dd6f7;box-shadow:0 0 14px rgba(91,200,245,0.35);}
+#postworkflow .pw-btn-g{background:transparent;color:var(--off-white);border:1px solid var(--border-light);}
+#postworkflow .pw-btn-g:hover{border-color:var(--cyan);color:var(--cyan);}
+#postworkflow .pw-flow{max-width:1600px;margin:0 auto;padding:3.4rem clamp(1.5rem,5vw,5rem) 0.6rem;position:relative;z-index:1;}
+#postworkflow .pw-stage{position:relative;}
+#postworkflow .pw-connector{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 0 4px;position:relative;}
+#postworkflow .pw-stage:last-child > .pw-connector{display:none;}
+#postworkflow .pw-chevron{width:28px;height:28px;color:var(--cyan);margin-top:-8px;animation:pwChevronFlow 1.8s ease-in-out infinite;}
+#postworkflow .pw-chevron:first-child{margin-top:0;}
+#postworkflow .pw-chevron:nth-child(2){animation-delay:0.28s;}
+@keyframes pwChevronFlow{0%,100%{opacity:0.22;filter:drop-shadow(0 0 2px rgba(91,200,245,0.3));}50%{opacity:1;filter:drop-shadow(0 0 14px rgba(91,200,245,0.9));}}
+#postworkflow .pw-box{background:var(--off-black);border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:background 0.35s ease,border-color 0.35s ease,box-shadow 0.4s ease,transform 0.25s ease;position:relative;outline:none;}
+#postworkflow .pw-box:focus-visible{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(91,200,245,0.2);}
+#postworkflow .pw-box::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:rgba(91,200,245,0.25);transition:background 0.35s ease,box-shadow 0.35s ease;}
+#postworkflow .pw-box:hover{background:rgba(91,200,245,0.04);border-color:rgba(91,200,245,0.5);box-shadow:0 0 30px rgba(91,200,245,0.18),inset 0 0 0 1px rgba(91,200,245,0.28);transform:translateY(-1px);}
+#postworkflow .pw-box:hover::before{background:var(--cyan);box-shadow:0 0 14px rgba(91,200,245,0.6);}
+#postworkflow .pw-stage.open .pw-box{background:rgba(91,200,245,0.05);border-color:var(--cyan);box-shadow:0 0 44px rgba(91,200,245,0.28),inset 0 0 0 1px var(--cyan);transform:none;animation:pwBoxPulse 0.7s cubic-bezier(0.22,1,0.36,1);}
+#postworkflow .pw-stage.open .pw-box::before{background:var(--cyan);box-shadow:0 0 22px rgba(91,200,245,0.9);}
+@keyframes pwBoxPulse{0%{box-shadow:0 0 22px rgba(91,200,245,0.1),inset 0 0 0 1px rgba(91,200,245,0.6);}45%{box-shadow:0 0 72px rgba(91,200,245,0.55),inset 0 0 0 1px var(--cyan);}100%{box-shadow:0 0 44px rgba(91,200,245,0.28),inset 0 0 0 1px var(--cyan);}}
+#postworkflow .pw-header{padding:1.6rem 3rem;position:relative;text-align:center;}
+#postworkflow .pw-num{font-family:var(--bebas);font-size:2.2rem;letter-spacing:0.06em;color:var(--cyan);font-weight:500;line-height:1;margin-bottom:0.55rem;opacity:0.45;transition:opacity 0.3s ease,text-shadow 0.3s ease;}
+#postworkflow .pw-title{font-family:var(--bebas);font-size:clamp(1.65rem,2.6vw,2rem);letter-spacing:0.04em;text-transform:uppercase;font-weight:700;line-height:1.1;color:var(--white);transition:color 0.3s ease,text-shadow 0.3s ease;}
+#postworkflow .pw-box:hover .pw-title,#postworkflow .pw-stage.open .pw-title{color:var(--cyan);text-shadow:0 0 18px rgba(91,200,245,0.45);}
+#postworkflow .pw-box:hover .pw-num,#postworkflow .pw-stage.open .pw-num{opacity:1;text-shadow:0 0 18px rgba(91,200,245,0.55);}
+#postworkflow .pw-caret{position:absolute;right:1.6rem;top:50%;transform:translateY(-50%);width:20px;height:20px;color:var(--cyan);opacity:0.55;transition:transform 0.5s cubic-bezier(0.34,1.56,0.64,1),opacity 0.25s;}
+#postworkflow .pw-box:hover .pw-caret{opacity:1;}
+#postworkflow .pw-stage.open .pw-caret{transform:translateY(-50%) rotate(180deg);opacity:1;}
+#postworkflow .pw-body{max-height:0;overflow:hidden;transition:max-height 0.6s cubic-bezier(0.22,1,0.36,1);}
+#postworkflow .pw-body-inner{padding:0 2.5rem 2rem;text-align:center;}
+#postworkflow .pw-rule{height:1px;width:100%;background:linear-gradient(90deg,transparent,var(--border) 20%,var(--border) 80%,transparent);margin-bottom:1.8rem;transform:scaleX(0);transform-origin:center;transition:transform 0.5s cubic-bezier(0.22,1,0.36,1) 0.08s;}
+#postworkflow .pw-stage.open .pw-rule{transform:scaleX(1);}
+#postworkflow .pw-item{opacity:0;transform:translateY(-8px);transition:opacity 0.4s ease,transform 0.45s cubic-bezier(0.22,1,0.36,1);}
+#postworkflow .pw-item + .pw-item{margin-top:1.3rem;}
+#postworkflow .pw-stage.open .pw-item{opacity:1;transform:translateY(0);}
+#postworkflow .pw-stage.open .pw-item:nth-of-type(1){transition-delay:0.14s;}
+#postworkflow .pw-stage.open .pw-item:nth-of-type(2){transition-delay:0.22s;}
+#postworkflow .pw-stage.open .pw-item:nth-of-type(3){transition-delay:0.30s;}
+#postworkflow .pw-stage.open .pw-item:nth-of-type(4){transition-delay:0.38s;}
+#postworkflow .pw-stage.open .pw-item:nth-of-type(5){transition-delay:0.46s;}
+#postworkflow .pw-stage.open .pw-item:nth-of-type(6){transition-delay:0.54s;}
+#postworkflow .pw-item-label{font-family:var(--bebas);font-size:1.05rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:0.5rem;line-height:1.1;}
+#postworkflow .pw-item-body{font-family:var(--sans);font-weight:400;color:#c8c8c8;font-size:1.1rem;line-height:1.75;max-width:1100px;margin:0 auto;}
+#postworkflow .pw-note{font-family:var(--sans);font-size:0.82rem;color:var(--muted);letter-spacing:0.16em;text-transform:uppercase;margin-top:1.6rem;padding-top:1.1rem;border-top:1px dashed var(--border);opacity:0;transition:opacity 0.4s ease 0.6s;}
+#postworkflow .pw-stage.open .pw-note{opacity:1;}
+#postworkflow .pw-note span{color:var(--cyan);}
+@media(max-width:768px){
+  #postworkflow .pw-hero{padding:6rem 1.4rem 2.5rem;min-height:min(720px,100vh);}
+  #postworkflow .pw-controls{padding:1rem 1.4rem;}
+  #postworkflow .pw-flow{padding:2.4rem 1.4rem 0.5rem;}
+  #postworkflow .pw-header{padding:1.2rem 3rem 1.2rem 1.4rem;}
+  #postworkflow .pw-caret{right:1.2rem;}
+  #postworkflow .pw-body-inner{padding:0 1.3rem 1.5rem;}
+  #postworkflow .pw-item-body{font-size:1rem;}
+}
+@media(max-width:640px){
+  #postworkflow .pw-hero{padding:5rem 1.2rem 2rem;min-height:min(620px,100vh);}
+  #postworkflow .pw-flow{padding:2rem 1.2rem 0.5rem;}
+  #postworkflow .pw-item-body{font-size:0.95rem;}
+}
+
 </style>
 </head>
 <body>
@@ -2769,6 +2846,220 @@ footer{background:var(--off-black);border-top:1px solid var(--border);padding:2.
 <!-- ═══════════════════════════════════════════════
      TERMS OF SERVICE PAGE
 ════════════════════════════════════════════════ -->
+<!-- ═══════════════════════════════════════════════
+     POST-WORKFLOW PAGE — /postworkflow
+════════════════════════════════════════════════ -->
+<div id="postworkflow" class="page-section" style="display:none;">
+  <div class="pw-hero">
+    <div class="pw-video-bg">
+      <iframe src="https://player.vimeo.com/video/1210013146?h=51c551cc55&amp;background=1&amp;autoplay=1&amp;muted=1&amp;loop=1&amp;controls=0&amp;title=0&amp;byline=0&amp;portrait=0&amp;dnt=1"
+              allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="The End Workflow"></iframe>
+    </div>
+    <div class="pw-overlay"></div>
+    <div class="pw-hero-top">
+      <div class="pw-headline-logo">
+        <img src="THE%20END%20POST%20LOGO%20WHITE.png" alt="The End Post">
+      </div>
+    </div>
+    <div class="pw-hero-bottom">
+      <div class="pw-slabel">How it works</div>
+      <p>Every production runs the same system. Click each stage to see how it happens and why.</p>
+    </div>
+  </div>
+
+  <div class="pw-controls">
+    <button class="pw-btn pw-btn-p" onclick="pwExpandAll()">Expand all</button>
+    <button class="pw-btn pw-btn-g" onclick="pwCollapseAll()">Collapse all</button>
+  </div>
+
+  <div class="pw-flow">
+    <!-- 01 -->
+    <div class="pw-stage">
+      <div class="pw-box" role="button" tabindex="0" onclick="pwToggle(this)">
+        <div class="pw-header">
+          <div class="pw-num">01</div>
+          <h3 class="pw-title">Pre-production planning</h3>
+          <svg class="pw-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="pw-body"><div class="pw-body-inner">
+          <div class="pw-rule"></div>
+          <div class="pw-item"><div class="pw-item-label">DIT workflow</div><p class="pw-item-body">We issue our DIT workflow document to your team before the shoot. Every production runs the same system. Folder structures, codec strategy, naming conventions and delivery specs are identical across all projects.</p></div>
+          <div class="pw-item"><div class="pw-item-label">Coordination</div><p class="pw-item-body">We coordinate directly with your DIT so they know exactly what we need and how to deliver it before a single frame is shot.</p></div>
+        </div></div>
+      </div>
+      <span class="pw-connector">
+        <svg class="pw-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        <svg class="pw-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </span>
+    </div>
+    <!-- 02 -->
+    <div class="pw-stage">
+      <div class="pw-box" role="button" tabindex="0" onclick="pwToggle(this)">
+        <div class="pw-header">
+          <div class="pw-num">02</div>
+          <h3 class="pw-title">On location</h3>
+          <svg class="pw-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="pw-body"><div class="pw-body-inner">
+          <div class="pw-rule"></div>
+          <div class="pw-item"><div class="pw-item-label">Backup</div><p class="pw-item-body">DIT backs up all media to local drives on set as normal.</p></div>
+          <div class="pw-item"><div class="pw-item-label">Upload</div><p class="pw-item-body">All media is uploaded directly to our cloud system via fast Ethernet or broadband connection.</p></div>
+          <div class="pw-item"><div class="pw-item-label">Hi-res only</div><p class="pw-item-body">We take the high-res footage only. No proxies or transcodes needed from your end. We handle all of that.</p></div>
+        </div></div>
+      </div>
+      <span class="pw-connector">
+        <svg class="pw-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        <svg class="pw-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </span>
+    </div>
+    <!-- 03 -->
+    <div class="pw-stage">
+      <div class="pw-box" role="button" tabindex="0" onclick="pwToggle(this)">
+        <div class="pw-header">
+          <div class="pw-num">03</div>
+          <h3 class="pw-title">Ingest, proxies &amp; storage</h3>
+          <svg class="pw-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="pw-body"><div class="pw-body-inner">
+          <div class="pw-rule"></div>
+          <div class="pw-item"><div class="pw-item-label">Storage</div><p class="pw-item-body">As soon as media arrives, all high-res footage goes immediately to cold storage.</p></div>
+          <div class="pw-item"><div class="pw-item-label">Proxies</div><p class="pw-item-body">Proxies are created automatically and sent to both hot storage for editing and cold storage for redundancy.</p></div>
+          <div class="pw-item"><div class="pw-item-label">Groups &amp; projects</div><p class="pw-item-body">Everything is grouped, organised and projects are built ready to edit. Nothing needs touching before the editor opens it.</p></div>
+          <div class="pw-item"><div class="pw-item-label">Archive migration</div><p class="pw-item-body">Existing archive footage can be migrated into the system so everything lives in one place, searchable and accessible from day one.</p></div>
+          <div class="pw-item"><div class="pw-item-label">External productions</div><p class="pw-item-body">For productions handled by external post houses, we can still ingest the footage, giving you access to all your media regardless of where the edit happens.</p></div>
+        </div></div>
+      </div>
+      <span class="pw-connector">
+        <svg class="pw-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        <svg class="pw-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </span>
+    </div>
+    <!-- 04 -->
+    <div class="pw-stage">
+      <div class="pw-box" role="button" tabindex="0" onclick="pwToggle(this)">
+        <div class="pw-header">
+          <div class="pw-num">04</div>
+          <h3 class="pw-title">Remote cloud edit</h3>
+          <svg class="pw-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="pw-body"><div class="pw-body-inner">
+          <div class="pw-rule"></div>
+          <div class="pw-item"><div class="pw-item-label">Remote editing</div><p class="pw-item-body">Editors work remotely on our cloud system. Any NLE, anywhere in the world. No local infrastructure needed on your side.</p></div>
+          <div class="pw-item"><div class="pw-item-label">Editors</div><p class="pw-item-body">We supply remote UK editors or you use your own. Either way the system, the structure and the workflow are identical.</p></div>
+          <div class="pw-item"><div class="pw-item-label">Assets</div><p class="pw-item-body">Graphics, music and all assets are delivered to a designated bin and imported to the correct place. Editors open the project and everything is where it should be.</p></div>
+          <div class="pw-item"><div class="pw-item-label">Universal system</div><p class="pw-item-body">If you want to extend the same structure and support to your external post houses, we can set that up too.</p></div>
+        </div></div>
+      </div>
+      <span class="pw-connector">
+        <svg class="pw-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        <svg class="pw-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </span>
+    </div>
+    <!-- 05 -->
+    <div class="pw-stage">
+      <div class="pw-box" role="button" tabindex="0" onclick="pwToggle(this)">
+        <div class="pw-header">
+          <div class="pw-num">05</div>
+          <h3 class="pw-title">Review &amp; approvals</h3>
+          <svg class="pw-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="pw-body"><div class="pw-body-inner">
+          <div class="pw-rule"></div>
+          <div class="pw-item"><div class="pw-item-label">Instant review links</div><p class="pw-item-body">Review links are generated directly from the edit and sent out instantly. As soon as a cut is ready it is in front of the right people.</p></div>
+          <div class="pw-item"><div class="pw-item-label">Rushes access</div><p class="pw-item-body">Reviewers can look back at footage as soon as it has been uploaded, not just at cut stage. The whole team has visibility of the material from day one.</p></div>
+          <div class="pw-item"><div class="pw-item-label">Viewers</div><p class="pw-item-body">Unlimited simultaneous viewers with tiered access. Internal teams and clients see exactly what they need to see and nothing they should not.</p></div>
+          <div class="pw-item"><div class="pw-item-label">Notes</div><p class="pw-item-body">Frame-accurate notes feed directly back into the edit. Nothing gets lost in email chains.</p></div>
+          <div class="pw-item"><div class="pw-item-label">Secure</div><p class="pw-item-body">Nothing leaves the system. All review and approval happens inside the platform.</p></div>
+          <div class="pw-note">&#8635; Revisions loop back to <span>Edit</span></div>
+        </div></div>
+      </div>
+      <span class="pw-connector">
+        <svg class="pw-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        <svg class="pw-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </span>
+    </div>
+    <!-- 06 -->
+    <div class="pw-stage">
+      <div class="pw-box" role="button" tabindex="0" onclick="pwToggle(this)">
+        <div class="pw-header">
+          <div class="pw-num">06</div>
+          <h3 class="pw-title">Online &amp; finishing</h3>
+          <svg class="pw-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="pw-body"><div class="pw-body-inner">
+          <div class="pw-rule"></div>
+          <div class="pw-item"><div class="pw-item-label">Online</div><p class="pw-item-body">We consolidate and send an AAF with the high-res to any facility anywhere in the world for online and dub, or handle it entirely within our system.</p></div>
+          <div class="pw-item"><div class="pw-item-label">Grade &amp; colour</div><p class="pw-item-body">Full colour grade. Your colourist or ours.</p></div>
+          <div class="pw-item"><div class="pw-item-label">Sound</div><p class="pw-item-body">Sound mix and dub to broadcast specification.</p></div>
+          <div class="pw-item"><div class="pw-item-label">Versions</div><p class="pw-item-body">All aspect ratios, subtitles, titles, graphics and versioning. Everything produced and QC&rsquo;d before it leaves.</p></div>
+        </div></div>
+      </div>
+      <span class="pw-connector">
+        <svg class="pw-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        <svg class="pw-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </span>
+    </div>
+    <!-- 07 -->
+    <div class="pw-stage">
+      <div class="pw-box" role="button" tabindex="0" onclick="pwToggle(this)">
+        <div class="pw-header">
+          <div class="pw-num">07</div>
+          <h3 class="pw-title">Delivery &amp; archive</h3>
+          <svg class="pw-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="pw-body"><div class="pw-body-inner">
+          <div class="pw-rule"></div>
+          <div class="pw-item"><div class="pw-item-label">Delivery</div><p class="pw-item-body">Masters, cutdowns and platform formats delivered to spec, on time.</p></div>
+          <div class="pw-item"><div class="pw-item-label">Archive</div><p class="pw-item-body">All media (rushes, proxies and masters) retained in secure long-term cloud archive. Everything stays in the same place, accessible whenever you need it.</p></div>
+        </div></div>
+      </div>
+      <span class="pw-connector">
+        <svg class="pw-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        <svg class="pw-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </span>
+    </div>
+    <!-- 08 -->
+    <div class="pw-stage">
+      <div class="pw-box" role="button" tabindex="0" onclick="pwToggle(this)">
+        <div class="pw-header">
+          <div class="pw-num">08</div>
+          <h3 class="pw-title">Support</h3>
+          <svg class="pw-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="pw-body"><div class="pw-body-inner">
+          <div class="pw-rule"></div>
+          <div class="pw-item"><div class="pw-item-label">24-hour support</div><p class="pw-item-body">Post supervision available around the clock, whenever your production needs it.</p></div>
+          <div class="pw-item"><div class="pw-item-label">Same system, anywhere</div><p class="pw-item-body">The workflow runs identically on every production, whether the edit happens with us, with an external facility, or anywhere in the world.</p></div>
+          <div class="pw-item"><div class="pw-item-label">One structure</div><p class="pw-item-body">Everything in one place. Always.</p></div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+  <div class="flogo"><a onclick="showPage('home')" style="cursor:pointer;"><img src="https://raw.githubusercontent.com/JLessell/ENDTV/dbca433f3430b22355731b24da158d1ea68adae7/THE%20END%20LOGO%202026%20WHITE%20LONG.png" alt="The End TV"></a></div>
+  <ul class="flinks">
+    <li><a onclick="showPage('work')">Our Work</a></li>
+    <li><a onclick="showPage('services')">What We Do</a></li>
+    <li><a onclick="showPage('post')">The End Post</a></li>
+    <li><a onclick="showPage('about')">About</a></li>
+    <li><a onclick="showPage('contact')">Get in Touch</a></li>
+    <li><a onclick="showPage('privacy')">Privacy</a></li>
+    <li><a onclick="showPage('terms')">Terms</a></li>
+  </ul>
+  <div class="fright">
+    <div class="femail"><a href="mailto:hello@theendtv.co.uk">hello@theendtv.co.uk</a></div>
+    <div class="fcopy">&copy; The End TV Limited 2026</div>
+    <div class="fsocial">
+      <a href="https://www.facebook.com/profile.php?id=61551629819002" target="_blank" rel="noopener" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+      <a href="https://www.linkedin.com/company/the-end-tv/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+      <a href="https://www.instagram.com/theendtvuk/" target="_blank" rel="noopener" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+      <a href="https://twitter.com/TheEndTVUK" target="_blank" rel="noopener" aria-label="X"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+    </div>
+  </div>
+</footer>
+</div>
+
 <div id="terms" class="page-section" style="display:none;">
   <div class="page-hero">
     <div class="slabel">Legal</div>
@@ -2900,12 +3191,13 @@ footer{background:var(--off-black);border-top:1px solid var(--border);padding:2.
 // Client-side routing: every page-section gets its own URL so direct
 // links (/work, /about, etc.) land on the correct page. Netlify's SPA
 // redirect (netlify.toml) rewrites unknown paths back to index.html.
-var VALID_PAGES = ['home','work','services','post','about','contact','privacy','terms'];
+var VALID_PAGES = ['home','work','services','post','postworkflow','about','contact','privacy','terms'];
 var PAGE_TITLES = {
   home: 'The End TV — Creative Studio, London',
   work: 'Our Work — The End TV',
   services: 'What We Do — The End TV',
   post: 'The End Post — The End TV',
+  postworkflow: 'How It Works — The End Post',
   about: 'About — The End TV',
   contact: 'Get in Touch — The End TV',
   privacy: 'Privacy — The End TV',
@@ -2940,6 +3232,50 @@ function renderPage(id) {
   window.scrollTo({top: 0, behavior: 'instant'});
   closeMenu();
 }
+
+
+// ===== POST-WORKFLOW accordion =====
+function pwToggle(box){
+  var stage = box.closest("#postworkflow .pw-stage");
+  if(!stage) return;
+  var body = box.querySelector(".pw-body");
+  if(!body) return;
+  var opening = !stage.classList.contains("open");
+  if(opening){
+    stage.classList.add("open");
+    body.style.maxHeight = body.scrollHeight + "px";
+  } else {
+    body.style.maxHeight = body.scrollHeight + "px";
+    void body.offsetHeight;
+    stage.classList.remove("open");
+    body.style.maxHeight = "0px";
+  }
+}
+function pwExpandAll(){
+  document.querySelectorAll("#postworkflow .pw-stage").forEach(function(s){
+    var body = s.querySelector(".pw-body");
+    if(!body) return;
+    s.classList.add("open");
+    body.style.maxHeight = body.scrollHeight + "px";
+  });
+}
+function pwCollapseAll(){
+  document.querySelectorAll("#postworkflow .pw-stage.open").forEach(function(s){
+    var body = s.querySelector(".pw-body");
+    if(!body) return;
+    body.style.maxHeight = body.scrollHeight + "px";
+    void body.offsetHeight;
+    s.classList.remove("open");
+    body.style.maxHeight = "0px";
+  });
+}
+window.addEventListener("resize", function(){
+  document.querySelectorAll("#postworkflow .pw-stage.open").forEach(function(s){
+    var body = s.querySelector(".pw-body");
+    if(body) body.style.maxHeight = body.scrollHeight + "px";
+  });
+});
+
 
 function showPage(id) {
   if (VALID_PAGES.indexOf(id) === -1) id = 'home';
