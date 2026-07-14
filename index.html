@@ -1103,6 +1103,12 @@ footer{background:var(--off-black);border-top:1px solid var(--border);padding:2.
 #postworkflow .pw-caret{position:absolute;right:1.6rem;top:50%;transform:translateY(-50%);width:20px;height:20px;color:var(--cyan);opacity:0.55;transition:transform 0.5s cubic-bezier(0.34,1.56,0.64,1),opacity 0.25s;}
 #postworkflow .pw-box:hover .pw-caret{opacity:1;}
 #postworkflow .pw-stage.open .pw-caret{transform:translateY(-50%) rotate(180deg);opacity:1;}
+#postworkflow .pw-header::after{content:"Click to expand";display:block;margin-top:0.55rem;font-family:var(--sans);font-size:0.62rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--cyan);opacity:0.55;transition:opacity 0.3s ease,letter-spacing 0.4s ease,text-shadow 0.3s ease;pointer-events:none;text-shadow:0 0 6px rgba(91,200,245,0.3);}
+#postworkflow .pw-box:hover .pw-header::after{opacity:1;letter-spacing:0.28em;text-shadow:0 0 12px rgba(91,200,245,0.65);}
+#postworkflow .pw-stage.open .pw-header::after{content:"Click to close";opacity:0.75;letter-spacing:0.22em;}
+#postworkflow .pw-caret{animation:pwCaretPulse 2s ease-in-out infinite;}
+#postworkflow .pw-box:hover .pw-caret,#postworkflow .pw-stage.open .pw-caret{animation:none;}
+@keyframes pwCaretPulse{0%,100%{opacity:0.5;}50%{opacity:1;filter:drop-shadow(0 0 10px rgba(91,200,245,0.75));}}
 #postworkflow .pw-body{max-height:0;overflow:hidden;transition:max-height 0.6s cubic-bezier(0.22,1,0.36,1);}
 #postworkflow .pw-body-inner{padding:0 2.5rem 2rem;text-align:center;}
 #postworkflow .pw-rule{height:1px;width:100%;background:linear-gradient(90deg,transparent,var(--border) 20%,var(--border) 80%,transparent);margin-bottom:1.8rem;transform:scaleX(0);transform-origin:center;transition:transform 0.5s cubic-bezier(0.22,1,0.36,1) 0.08s;}
