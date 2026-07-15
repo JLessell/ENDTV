@@ -1062,13 +1062,13 @@ footer{background:var(--off-black);border-top:1px solid var(--border);padding:2.
 /* =================================================
    POST-WORKFLOW PAGE — /postworkflow
    ================================================= */
-#postworkflow .pw-hero{padding:7rem 2.8rem 3rem;border-bottom:1px solid var(--border);position:relative;z-index:1;text-align:center;overflow:hidden;min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;}
-#postworkflow .pw-hero-top,#postworkflow .pw-hero-bottom{position:relative;z-index:2;max-width:900px;margin:0 auto;width:100%;}
-#postworkflow .pw-hero-top{padding-top:1rem;}
-#postworkflow .pw-hero-bottom{padding-bottom:2rem;}
-#postworkflow .pw-video-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;}
-#postworkflow .pw-video-bg iframe{position:absolute;top:50%;left:50%;width:177.78vh;height:100vh;min-width:100%;min-height:56.25vw;transform:translate(-50%,-50%);border:none;pointer-events:none;}
-#postworkflow .pw-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(8,8,8,0.55) 0%,rgba(8,8,8,0.25) 25%,rgba(8,8,8,0.2) 55%,rgba(8,8,8,0.35) 100%);pointer-events:none;}
+#postworkflow .pw-hero{padding:0;border-bottom:1px solid var(--border);position:relative;z-index:1;text-align:center;background:var(--black);display:flex;flex-direction:column;align-items:center;gap:2.4rem;}
+#postworkflow .pw-hero-top{position:relative;z-index:2;max-width:900px;margin:0 auto;width:100%;padding:5rem 2.8rem 0;box-sizing:border-box;}
+#postworkflow .pw-video-bg{position:relative;width:100%;height:clamp(360px,52vh,600px);overflow:hidden;background:#000;z-index:1;}
+#postworkflow .pw-video-bg iframe{position:absolute;top:50%;left:50%;width:177.78vh;height:100vh;min-width:100vw;min-height:56.25vw;transform:translate(-50%,-50%);border:none;pointer-events:none;z-index:1;}
+#postworkflow .pw-overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(8,8,8,0.45) 0%,rgba(8,8,8,0.65) 55%,rgba(8,8,8,0.85) 100%);pointer-events:none;}
+#postworkflow .pw-hero-bottom{position:absolute;left:50%;bottom:2.5rem;transform:translateX(-50%);z-index:3;max-width:900px;width:100%;padding:0 2.8rem;box-sizing:border-box;}
+#postworkflow .pw-hero-bottom p{text-shadow:0 2px 12px rgba(0,0,0,0.85);}
 #postworkflow .pw-slabel{font-family:var(--bebas);font-size:clamp(1.85rem,3vw,2.4rem);letter-spacing:0.06em;text-transform:uppercase;color:var(--cyan);font-weight:600;line-height:1.1;margin-bottom:1.2rem;}
 #postworkflow .pw-headline-logo{margin:0 auto;line-height:0;}
 #postworkflow .pw-headline-logo img{height:clamp(2.25rem,5.6vw,4.9rem);width:auto;display:inline-block;filter:drop-shadow(0 0 30px rgba(91,200,245,0.35));}
@@ -1127,6 +1127,12 @@ footer{background:var(--off-black);border-top:1px solid var(--border);padding:2.
 #postworkflow .pw-note{font-family:var(--sans);font-size:0.82rem;color:var(--muted);letter-spacing:0.16em;text-transform:uppercase;margin-top:1.6rem;padding-top:1.1rem;border-top:1px dashed var(--border);opacity:0;transition:opacity 0.4s ease 0.6s;}
 #postworkflow .pw-stage.open .pw-note{opacity:1;}
 #postworkflow .pw-note span{color:var(--cyan);}
+.pw-download{padding:2rem clamp(1.5rem,5vw,5rem);text-align:center;border-top:1px solid var(--border);position:relative;z-index:1;background:var(--black);}
+.pw-download-inner{max-width:520px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:0.7rem;}
+.pw-download-slabel{font-family:var(--sans);font-size:0.62rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);line-height:1;}
+.pw-download-btn{display:inline-flex;align-items:center;gap:0.5rem;background:transparent;color:var(--cyan);padding:0.65rem 1.25rem;font-family:var(--sans);font-size:0.62rem;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;text-decoration:none;border:1px solid var(--cyan-dim);transition:border-color 0.25s,background 0.25s,box-shadow 0.25s,transform 0.15s;}
+.pw-download-btn:hover{border-color:var(--cyan);background:rgba(91,200,245,0.08);box-shadow:0 0 18px rgba(91,200,245,0.3);transform:translateY(-1px);color:#7dd6f7;}
+.pw-download-btn svg{width:14px;height:14px;flex-shrink:0;}
 @media(max-width:768px){
   #postworkflow .pw-hero{padding:6rem 1.4rem 2.5rem;min-height:min(720px,100vh);}
   #postworkflow .pw-controls{padding:1rem 1.4rem;}
@@ -2857,19 +2863,19 @@ footer{background:var(--off-black);border-top:1px solid var(--border);padding:2.
 ════════════════════════════════════════════════ -->
 <div id="postworkflow" class="page-section" style="display:none;">
   <div class="pw-hero">
-    <div class="pw-video-bg">
-      <iframe src="https://player.vimeo.com/video/1210013146?h=51c551cc55&amp;background=1&amp;autoplay=1&amp;muted=1&amp;loop=1&amp;controls=0&amp;title=0&amp;byline=0&amp;portrait=0&amp;dnt=1"
-              allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="The End Workflow"></iframe>
-    </div>
-    <div class="pw-overlay"></div>
     <div class="pw-hero-top">
       <div class="pw-headline-logo">
         <img src="THE%20END%20POST%20LOGO%20WHITE.png" alt="The End Post">
       </div>
     </div>
-    <div class="pw-hero-bottom">
-      <div class="pw-slabel">How it works</div>
-      <p>Every production runs the same system. Click each stage to see how it happens and why.</p>
+    <div class="pw-video-bg">
+      <iframe src="https://player.vimeo.com/video/1210013146?h=51c551cc55&amp;background=1&amp;autoplay=1&amp;muted=1&amp;loop=1&amp;controls=0&amp;title=0&amp;byline=0&amp;portrait=0&amp;dnt=1"
+              allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="The End Workflow"></iframe>
+      <div class="pw-overlay"></div>
+      <div class="pw-hero-bottom">
+        <div class="pw-slabel">How it works</div>
+        <p>Every production runs the same system. Click each stage to see how it happens and why.</p>
+      </div>
     </div>
   </div>
 
@@ -3042,7 +3048,25 @@ footer{background:var(--off-black);border-top:1px solid var(--border);padding:2.
     </div>
   </div>
 
-  <footer>
+      </div>
+    </div>
+  </div>
+
+  <div class="pw-download">
+    <div class="pw-download-inner">
+      <div class="pw-download-slabel">Take it with you</div>
+      <a href="TheEndPost-Workflow.pdf" class="pw-download-btn" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        Download PDF
+      </a>
+    </div>
+  </div>
+
+    <footer>
   <div class="flogo"><a onclick="showPage('home')" style="cursor:pointer;"><img src="https://raw.githubusercontent.com/JLessell/ENDTV/dbca433f3430b22355731b24da158d1ea68adae7/THE%20END%20LOGO%202026%20WHITE%20LONG.png" alt="The End TV"></a></div>
   <ul class="flinks">
     <li><a onclick="showPage('work')">Our Work</a></li>
