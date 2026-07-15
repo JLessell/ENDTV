@@ -3,6 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+(function(){
+  var p = window.location.pathname;
+  if (p && p !== '/' && p !== '/index.html') {
+    document.write('<style>#home{display:none!important;}</style>');
+  }
+})();
+</script>
 <title>The End TV &mdash; Creative Studio, London</title>
 <meta property="og:title" content="The End TV" />
 <meta property="og:description" content="Branded content production for bold, ambitious brands." />
@@ -3257,6 +3265,7 @@ function renderPage(id) {
     page.style.setProperty('display', 'block', 'important');
     page.querySelectorAll('.sr').forEach(function(el) { el.classList.add('revealed'); });
     if (id === 'post') initPostHeadline();
+    if (id === 'home' && typeof window.initHeroSlot === 'function') { setTimeout(window.initHeroSlot, 30); }
   }
   document.title = PAGE_TITLES[id] || PAGE_TITLES.home;
   window.scrollTo({top: 0, behavior: 'instant'});
@@ -3375,65 +3384,81 @@ function closeMenu() {
   const slot  = document.getElementById('hero-slot');
   if (!inner || !slot) return;
 
-  // Wait for fonts to load so we get accurate measurements
+  let intervalId = null;
+  let lineH = 0;
+  let current = 0;
+  let locked = false;
+  let phrases = null;
+
+  function rotateNext() {
+    if (locked) return;
+    current++;
+    inner.style.transform = 'translateY(-' + (current * lineH) + 'px)';
+    if (current === phrases.length - 1) {
+      locked = true;
+      setTimeout(() => {
+        inner.style.transition = 'none';
+        current = 0;
+        inner.style.transform = 'translateY(0)';
+        void inner.offsetHeight;
+        inner.style.transition = 'transform 0.65s cubic-bezier(0.77,0,0.175,1)';
+        locked = false;
+      }, 700);
+    }
+  }
+
   function initAnim() {
-    const phrases = inner.querySelectorAll('span');
+    phrases = inner.querySelectorAll('span');
     if (!phrases.length) return;
 
-    // Measure one span for its natural height
-    const testSpan = phrases[0];
-    let lineH = testSpan.getBoundingClientRect().height || testSpan.offsetHeight || 80;
-    
-    // Add 8% extra height to ensure no text clipping
-    lineH = lineH * 1.08;
+    // Clear any previously-set inline sizes so we get natural measurement
+    slot.style.height = '';
+    phrases.forEach(s => { s.style.height = ''; s.style.lineHeight = ''; });
+    inner.style.height = '';
+    inner.style.transition = 'none';
+    inner.style.transform = 'translateY(0)';
+    void inner.offsetHeight;
 
-    // Set explicit pixel heights on slot and each span
+    // If home is hidden, measurement returns 0 — bail; we'll be called again when home becomes visible
+    const measured = phrases[0].getBoundingClientRect().height;
+    if (!measured) return;
+
+    lineH = measured * 1.08;
     slot.style.height = lineH + 'px';
     slot.style.overflow = 'hidden';
     phrases.forEach(s => { s.style.height = lineH + 'px'; s.style.lineHeight = lineH + 'px'; });
     inner.style.height = (lineH * phrases.length) + 'px';
-    inner.style.transform = 'translateY(0)';
-
-    let current = 0, locked = false;
+    void inner.offsetHeight;
     inner.style.transition = 'transform 0.65s cubic-bezier(0.77,0,0.175,1)';
 
-    function rotateNext() {
-      if (locked) return;
-      current++;
-      inner.style.transform = 'translateY(-' + (current * lineH) + 'px)';
-      if (current === phrases.length - 1) {
-        // Just animated to the duplicate of index 0. Snap back silently after transition.
-        locked = true;
-        setTimeout(() => {
-          inner.style.transition = 'none';
-          current = 0;
-          inner.style.transform = 'translateY(0)';
-          // Force reflow, then re-enable transition
-          void inner.offsetHeight;
-          inner.style.transition = 'transform 0.65s cubic-bezier(0.77,0,0.175,1)';
-          locked = false;
-        }, 700);
-      }
-    }
+    current = 0;
+    locked = false;
 
-    setInterval(rotateNext, 2400);
-
-    window.addEventListener('resize', () => {
-      let newH = phrases[0].getBoundingClientRect().height || lineH;
-      newH = newH * 1.08;
-      lineH = newH;
-      slot.style.height = newH + 'px';
-      phrases.forEach(s => { s.style.height = newH + 'px'; s.style.lineHeight = newH + 'px'; });
-      inner.style.height = (newH * phrases.length) + 'px';
-      const prev = inner.style.transition;
-      inner.style.transition = 'none';
-      inner.style.transform = 'translateY(-' + (current * newH) + 'px)';
-      void inner.offsetHeight;
-      inner.style.transition = prev;
-    });
+    if (intervalId) clearInterval(intervalId);
+    intervalId = setInterval(rotateNext, 2400);
   }
 
-  // Init after a short delay to ensure fonts are rendered
+  window.initHeroSlot = initAnim;
+
+  window.addEventListener('resize', () => {
+    if (!phrases || !phrases.length) return;
+    slot.style.height = '';
+    phrases.forEach(s => { s.style.height = ''; s.style.lineHeight = ''; });
+    inner.style.height = '';
+    void inner.offsetHeight;
+    const measured = phrases[0].getBoundingClientRect().height;
+    if (!measured) return;
+    lineH = measured * 1.08;
+    slot.style.height = lineH + 'px';
+    phrases.forEach(s => { s.style.height = lineH + 'px'; s.style.lineHeight = lineH + 'px'; });
+    inner.style.height = (lineH * phrases.length) + 'px';
+    const prev = inner.style.transition;
+    inner.style.transition = 'none';
+    inner.style.transform = 'translateY(-' + (current * lineH) + 'px)';
+    void inner.offsetHeight;
+    inner.style.transition = prev;
+  });
+
   if (document.fonts && document.fonts.ready) {
     document.fonts.ready.then(initAnim);
   } else {
