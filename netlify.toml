@@ -17,6 +17,13 @@
   to = "/theenddeck/ABF-AGM-2026.html"
   status = 200
 
+# Clean URL for The End Post — AI Edit Cloud sales page — must come before
+# the catch-all below so it is matched first.
+[[redirects]]
+  from = "/theendpost"
+  to = "/theenddeck/theendpost.html"
+  status = 200
+
 # SPA deep-link support: any unknown path serves index.html so the
 # client-side router can read location.pathname and render the right page.
 # Existing files (e.g. client-area.html, og-image.jpg) are served as-is
