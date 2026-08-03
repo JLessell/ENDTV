@@ -24,6 +24,13 @@
   to = "/theenddeck/theendpost.html"
   status = 200
 
+# Clean URL for the EZRA x Venus Williams creative deck — not linked from
+# anywhere on the site, must come before the catch-all below.
+[[redirects]]
+  from = "/EzrahostsSep26"
+  to = "/theenddeck/EzrahostsSep26.html"
+  status = 200
+
 # SPA deep-link support: any unknown path serves index.html so the
 # client-side router can read location.pathname and render the right page.
 # Existing files (e.g. client-area.html, og-image.jpg) are served as-is
