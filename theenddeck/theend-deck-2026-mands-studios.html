@@ -183,7 +183,7 @@
   .buildsteps{display:grid;grid-template-columns:repeat(4,1fr);gap:2.8rem;margin-top:2.8rem}
   .buildsteps.five{grid-template-columns:repeat(5,1fr);gap:1.6rem}
   .buildsteps.five .bstep{padding:1.5rem 1.2rem}
-  .buildsteps.five .bstep:not(:last-child)::after{width:1.6rem;height:1.6rem;font-size:1.15rem}
+  .buildsteps.five .bstep:not(:last-child)::after{width:.6rem;height:.6rem}
   @media(max-width:1200px){.buildsteps.five{grid-template-columns:repeat(3,1fr);gap:2.2rem}.buildsteps.five .bstep:nth-child(3)::after{display:none}}
   @media(max-width:900px){.buildsteps.five{grid-template-columns:repeat(2,1fr)}.buildsteps.five .bstep::after{display:none}}
   @media(max-width:560px){.buildsteps.five{grid-template-columns:1fr}}
@@ -193,7 +193,7 @@
   .bstep h4{font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.03em;font-size:1.35rem;color:var(--white);margin-bottom:.6rem}
   .bstep h4::after{content:".";color:var(--blue)}
   .bstep p{font-size:1rem;color:var(--white);font-weight:300;line-height:1.5}
-  .bstep:not(:last-child)::after{content:"→";position:absolute;top:50%;right:0;width:2.8rem;height:2.8rem;transform:translate(100%,-50%);display:flex;align-items:center;justify-content:center;color:var(--blue);font-size:1.5rem;text-shadow:0 0 10px rgba(91,200,245,.9),0 0 22px rgba(91,200,245,.55);z-index:2;pointer-events:none}
+  .bstep:not(:last-child)::after{content:"";position:absolute;top:50%;right:0;width:.8rem;height:.8rem;transform:translate(-40%,-50%) rotate(45deg);border-top:3px solid var(--blue);border-right:3px solid var(--blue);filter:drop-shadow(0 0 6px rgba(91,200,245,.8));z-index:2;pointer-events:none;background:none}
   @media(max-width:900px){.buildsteps{grid-template-columns:repeat(2,1fr)}.bstep:nth-child(2)::after{display:none}}
   @media(max-width:560px){.buildsteps{grid-template-columns:1fr}.bstep::after{display:none}}
   .loop .node{border:1px solid var(--blue);border-radius:100px;padding:.85rem 1.7rem;font-weight:500;color:var(--blue)}
@@ -516,7 +516,7 @@
   #s-dfw .posterwrap img{width:100%;display:block}
   #s-picky-bits .posterwrap{margin:0 0 1.8rem;max-width:960px;border-radius:16px;overflow:hidden;border:1px solid rgba(91,200,245,.4);box-shadow:0 24px 60px rgba(0,0,0,.5),inset 0 0 24px rgba(91,200,245,.06)}
   #s-picky-bits .posterwrap img{width:100%;display:block}
-  #s-picky-bits{align-items:center}
+  #s-picky-bits{align-items:center;justify-content:center}
   #s-picky-bits .kicker,#s-picky-bits .accentline{align-self:center}
   #s-dfw .lead-ref{max-width:min(1050px,85vw)}
   #s-picky-bits .lead-ref{max-width:min(1150px,85vw)}
@@ -543,16 +543,23 @@
     }
     .slide:last-child{page-break-after:auto;break-after:auto}
     .num{top:2.4vh!important}
-    .showwall{grid-auto-rows:min(8.4vw,84px)!important;gap:7px!important}
+    .showwall{grid-auto-rows:min(7vw,70px)!important;gap:6px!important;margin-top:.6rem!important}
+    .showlabel{margin-top:1rem!important}
+    .brandrow{margin-top:1rem!important;gap:.9rem!important}
+    .bchip{height:42px!important;padding:0 .8rem!important}
+    .brandlbl{font-size:.9rem!important}
     .ranges{gap:.7rem!important}
     .celebgrid{gap:.6rem!important}
+    .celeb{aspect-ratio:auto!important;height:min(10vw,120px)!important}
     .ideas2{gap:.7rem!important}
     .icard2{padding:1rem 1.1rem!important}
+    .buildsteps{grid-template-columns:repeat(4,1fr)!important;gap:1.2rem!important}
+    .buildsteps .bstep{padding:1.2rem 1rem!important}
+    .buildsteps .bstep p{font-size:.84rem!important;line-height:1.4!important}
     .buildsteps.five{grid-template-columns:repeat(5,1fr)!important;gap:.9rem!important}
     .buildsteps.five .bstep{padding:1.1rem .9rem!important}
     .buildsteps.five .bstep h4{font-size:1.05rem!important}
     .buildsteps.five .bstep p{font-size:.78rem!important;line-height:1.4!important}
-    .buildsteps.five .bstep:not(:last-child)::after{width:1.2rem!important;height:1.2rem!important;font-size:1rem!important}
     *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important}
     #gate{display:none!important}
   }
@@ -624,7 +631,7 @@
       <a href="#s-talent" data-key="talent">Talent</a>
       <a href="#s-close" data-key="ask">The Studio</a>
     </nav>
-    <a class="pdfbtn" href="MS_Studios_Deck_11.pdf" target="_blank" rel="noopener">Download PDF</a>
+    <a class="pdfbtn" href="/theenddeck/theend-deck-2026-mands-studios.pdf" download="M&amp;S Studios Pitch.pdf" target="_blank" rel="noopener">Download PDF</a>
   </div>
 </header>
 
