@@ -543,19 +543,27 @@
     }
     .slide:last-child{page-break-after:auto;break-after:auto}
     .num{top:2.4vh!important}
-    .showwall{grid-auto-rows:min(8.8vw,112px)!important;gap:7px!important;margin-top:.4rem!important}
-    #s-team .kicker,#s-team .accentline{margin-bottom:.5rem!important}
-    #s-team h1{margin-bottom:.3rem!important}
-    #s-team .lead-ref{margin-bottom:.3rem!important}
-    #s-team h1{font-size:clamp(2rem,4.6vw,3.4rem)!important}
-    #s-team .lead-ref{margin-top:.3rem!important}
-    .showlabel{margin-top:.7rem!important}
-    .brandrow{display:none!important}
+    /* Team page: compact header frees up real room for the show grid + brand row, matching the site */
+    #s-team .kicker{font-size:1.9rem!important;margin-bottom:.35rem!important}
+    #s-team .accentline{margin-bottom:.6rem!important}
+    #s-team h1{font-size:1.7rem!important;margin-bottom:.35rem!important;font-weight:500!important}
+    #s-team .lead-ref{font-size:.95rem!important;white-space:normal!important;margin-bottom:.5rem!important}
+    .showlabel{margin-top:0!important;margin-bottom:.5rem!important}
+    .showwall{grid-auto-rows:108px!important;gap:8px!important;margin-top:0!important}
+    .brandrow{margin-top:.9rem!important;gap:1rem!important}
+    .bchip{height:48px!important;padding:0 .9rem!important}
+    .brandlbl{font-size:.85rem!important}
     .ranges{gap:.7rem!important}
     .ideasplit{justify-content:flex-start!important}
-    .celebgrid{grid-template-columns:repeat(5,1fr)!important;gap:.7rem!important}
-    .celeb{aspect-ratio:auto!important;height:min(12vw,160px)!important}
-    .celeb .nm{font-size:.85rem!important}
+    /* Talent page: same compact-header approach, tall natural-ish crop, anchored to the top so no faces are cut off */
+    #s-talent .kicker{font-size:1.9rem!important;margin-bottom:.35rem!important}
+    #s-talent .accentline{margin-bottom:.6rem!important}
+    #s-talent .sechead{font-size:1.7rem!important;margin-bottom:.35rem!important;font-weight:500!important}
+    #s-talent .lead-ref{font-size:.95rem!important;margin-bottom:.5rem!important}
+    .celebgrid{grid-template-columns:repeat(5,1fr)!important;gap:.8rem!important;margin-top:0!important}
+    .celeb{aspect-ratio:auto!important;height:250px!important}
+    .celeb img{object-position:center 22%!important}
+    .celeb .nm{font-size:1rem!important}
     .ideas2{gap:.7rem!important}
     .icard2{padding:1rem 1.1rem!important}
     .buildsteps{grid-template-columns:repeat(4,1fr)!important;gap:1.2rem!important}
