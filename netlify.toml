@@ -34,7 +34,7 @@
 # Clean URL for the M&S Studios pitch deck — not linked from anywhere on
 # the site, must come before the catch-all below.
 [[redirects]]
-  from = "/ms"
+  from = "/m-and-s"
   to = "/theenddeck/theend-deck-2026-mands-studios.html"
   status = 200
 
