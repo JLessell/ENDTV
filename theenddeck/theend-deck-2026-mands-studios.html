@@ -548,8 +548,13 @@
     #s-team .accentline{margin-bottom:.6rem!important}
     #s-team h1{font-size:1.7rem!important;margin-bottom:.35rem!important;font-weight:500!important}
     #s-team .lead-ref{font-size:.95rem!important;white-space:normal!important;margin-bottom:.5rem!important}
-    .showlabel{margin-top:0!important;margin-bottom:.5rem!important}
-    .showwall{grid-auto-rows:108px!important;gap:8px!important;margin-top:0!important}
+    .showlabel{margin-top:0!important;margin-bottom:.5rem!important;font-size:.72rem!important;letter-spacing:.08em!important;white-space:nowrap!important}
+    /* photo-wall: each tile sized to its own image's natural shape, no forced box, no dead space */
+    .showwall{display:flex!important;flex-wrap:wrap!important;max-width:none!important;grid-template-columns:none!important;gap:10px!important;margin-top:0!important}
+    .showwall .show{height:128px!important;width:auto!important;flex:none!important;grid-column:auto!important;grid-row:auto!important}
+    .showwall .show:nth-child(1),.showwall .show:nth-child(8){height:200px!important}
+    .kn-tile .kn-label{font-size:1.1rem!important}
+    .showwall .show img{position:static!important;height:100%!important;width:auto!important;object-fit:contain!important;display:block!important}
     .brandrow{margin-top:.9rem!important;gap:1rem!important}
     .bchip{height:48px!important;padding:0 .9rem!important}
     .brandlbl{font-size:.85rem!important}
@@ -583,8 +588,6 @@
     #s-dfw{height:auto!important;min-height:100vh!important;page-break-inside:auto!important;break-inside:auto!important;padding-bottom:3vh!important;justify-content:center!important}
     #s-dfw .posterwrap{break-after:page;page-break-after:always;max-width:1440px!important;margin:0 auto!important}
     #s-dfw .dfwh2{margin-top:6vh!important}
-    /* Team page: show the whole tile artwork instead of cropping it to fill the box */
-    .showwall .show img{object-fit:contain!important;background:#0b0b0b!important}
   }
 
   /* ===== PASSWORD GATE ===== */
