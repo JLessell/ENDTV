@@ -556,10 +556,13 @@
        PDF export. Mirrors the live site's dense-packed layout exactly: Britain's Got Talent
        (1st tile) spans 2 cols x 2 rows top-left, Kitchen Nightmares (8th tile) spans 2 cols x 2
        rows bottom-right, everything else is a single cell. */
+    #s-team{display:flex!important;flex-direction:column!important}
     .showwall{
       display:grid!important;
+      flex:1 1 auto!important;
       grid-template-columns:repeat(6,1fr)!important;
-      grid-template-rows:repeat(3,100px)!important;
+      grid-template-rows:repeat(3,minmax(0,1fr))!important;
+      min-height:0!important;
       grid-template-areas:
         "t1 t1 t2 t3 t4 t5"
         "t1 t1 t6 t7 t8 t8"
@@ -581,8 +584,9 @@
     .showwall .show:nth-child(10){grid-area:t10!important}
     .showwall .show:nth-child(11){grid-area:t11!important}
     .showwall .show:nth-child(12){grid-area:t12!important}
+    .showwall .show{aspect-ratio:auto!important;height:100%!important}
     .showwall .show img{object-fit:cover!important;object-position:center!important}
-    .brandrow{margin-top:.9rem!important;gap:1rem!important}
+    .brandrow{flex:0 0 auto!important;margin-top:.9rem!important;gap:1rem!important}
     .bchip{height:48px!important;padding:0 .9rem!important}
     .brandlbl{font-size:.85rem!important}
     .ranges{gap:.7rem!important}
